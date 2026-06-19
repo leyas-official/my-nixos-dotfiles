@@ -1,0 +1,80 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "#BBC4B9",
+          "leading_diamond": "<#BFA8BF>~</> ",
+          "properties": {
+            "display_host": true
+          },
+          "style": "diamond",
+          "template": "{{ .UserName }}@{{ .HostName }} ",
+          "type": "session"
+        },
+        {
+          "foreground": "#BFA8BF",
+          "properties": {
+            "branch_icon": "\ue725 ",
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
+            "fetch_worktree_count": true
+          },
+          "style": "diamond",
+          "template": "<#fff>{{ .UpstreamIcon }}</>{{ .HEAD }}",
+          "type": "git"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "#A6E3A1",
+          "template": " ( {{ .Venv }} Venv ) ",
+          "properties": {
+            "display_mode": "environment",
+            "fetch_virtual_env": true,
+            "fetch_version": false
+          }
+        },
+        {
+          "foreground": "#B6D6F2",
+          "leading_diamond": "<#BFA8BF>~</>",
+          "properties": {
+            "folder_icon": "\u002F",
+            "folder_separator_icon": " \u002F ",
+            "home_icon": "home",
+            "style": "agnoster_full"
+          },
+          "style": "diamond",
+          "template": " \ue5ff {{ .Path }}",
+          "trailing_diamond": "",
+          "type": "path"
+        },
+        {
+          "foreground": "#BFA8BF",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#fff{{ end }}"
+          ],
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "plain",
+          "template": " \u007E ",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "console_title_template": "{{ .Folder }}",
+  "version": 3
+}
