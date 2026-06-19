@@ -1,4 +1,9 @@
-{ pkgs, spicetify-nix, ... }:
+{
+  config,
+  pkgs,
+  spicetify-nix,
+  ...
+}:
 let
   spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
@@ -129,7 +134,7 @@ in
     enabledExtensions = with spicePkgs.extensions; [
       adblockify
       hidePodcasts
-      shuffle # shuffle+ (special characters are sanitized out of extension names)
+      shuffle
     ];
     theme = spicePkgs.themes.catppuccin;
     colorScheme = "mocha";
@@ -142,13 +147,6 @@ in
     size = 24;
   };
 
-  # imports = [
-  #   ./homeManagerModules/shell/default.nix
-  #   ./homeManagerModules/git/gitModule.nix
-  #   ./homeManagerModules/programs/hldedger.nix
-  #   # ./homeManagerModules/programs/spotify.nix
-  # ];
-
   xdg = {
     enable = true;
     mime.enable = true;
@@ -158,6 +156,9 @@ in
 
       defaultApplications = {
         "text/plain" = [ "nvim" ];
+        "x-scheme-handler/http" = "browser-focus.desktop";
+        "x-scheme-handler/https" = "browser-focus.desktop";
+        "text/html" = "browser-focus.desktop";
       };
     };
   };
@@ -167,6 +168,18 @@ in
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
+    ];
+  };
+
+  xdg.desktopEntries.browser-focus = {
+    name = "Browser Focus";
+    exec = "${config.home.homeDirectory}/.config/home-manager/config/hypr/scripts/browser_focus.sh %u";
+    terminal = false;
+    type = "Application";
+    mimeType = [
+      "x-scheme-handler/http"
+      "x-scheme-handler/https"
+      "text/html"
     ];
   };
 
@@ -208,6 +221,7 @@ in
     eza
     gopeed
     tableplus
+    jetbrains.pycharm
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

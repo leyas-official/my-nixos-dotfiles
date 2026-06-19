@@ -2,14 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./modules/sddm.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./modules/sddm.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -87,28 +87,27 @@
   users.users."leyas" = {
     isNormalUser = true;
     description = "leyas";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.fish;
   };
 
-  # Install firefox.
   programs.fish.enable = true;
-
-  xdg.mime.defaultApplications = {
-    "x-scheme-handler/http" = "librewolf.desktop";
-    "x-scheme-handler/https" = "librewolf.desktop";
-    "text/html" = "librewolf.desktop";
-  };
 
   # Enable installed pkgs
   programs.hyprland.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
- 
+
   # Enable nix flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-	
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   # Enable bluetooth on boot
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -116,48 +115,48 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     neovim
-     gcc
-     wget
-     hyprland
-     librewolf
-     fastfetch
-     go
-     goose
-     air
-     yazi
-     git
-     gh
-     lazygit
-     fish
-     ripdrag
-     waybar
-     hyprlock
-     wlogout
-     flameshot
-     rofi
-     btop
-     pamixer
-     pavucontrol
-     curl
-     wl-clipboard
-     discord
-     smartmontools
-     cargo
-     python3
-     zip
-     unzip
-     nixd
-     nixfmt
-     blueman
-     impala
-     statix
-     brightnessctl
-     font-awesome
+    neovim
+    gcc
+    wget
+    hyprland
+    librewolf
+    fastfetch
+    go
+    goose
+    air
+    yazi
+    git
+    gh
+    lazygit
+    fish
+    ripdrag
+    waybar
+    hyprlock
+    wlogout
+    flameshot
+    rofi
+    btop
+    pamixer
+    pavucontrol
+    curl
+    wl-clipboard
+    discord
+    smartmontools
+    cargo
+    python3
+    zip
+    unzip
+    nixd
+    nixfmt
+    blueman
+    impala
+    statix
+    brightnessctl
+    font-awesome
   ];
 
   fonts.packages = with pkgs; [
-     nerd-fonts.jetbrains-mono
+    nerd-fonts.jetbrains-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
