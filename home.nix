@@ -35,11 +35,6 @@ in
 
   };
 
-  imports = [
-    # include modules to home.nix
-    ./modules/sddm.nix
-  ];
-
   programs.fish = {
     enable = true;
 
