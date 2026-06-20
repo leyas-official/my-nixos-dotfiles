@@ -35,6 +35,11 @@ in
 
   };
 
+  imports = [
+    # include modules to home.nix
+    ./modules/sddm.nix
+  ];
+
   programs.fish = {
     enable = true;
 
@@ -159,6 +164,11 @@ in
         "x-scheme-handler/http" = "browser-focus.desktop";
         "x-scheme-handler/https" = "browser-focus.desktop";
         "text/html" = "browser-focus.desktop";
+        "video/mp4" = "celluloid.desktop";
+        "video/x-matroska" = "celluloid.desktop";
+        "video/webm" = "celluloid.desktop";
+        "video/avi" = "celluloid.desktop";
+        "video/mpeg" = "celluloid.desktop";
       };
     };
   };
@@ -223,6 +233,7 @@ in
     tableplus
     jetbrains.pycharm
     obs-studio
+    celluloid
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
