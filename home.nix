@@ -21,8 +21,8 @@ in
       map (name: {
         name = ".config/${name}";
         value = {
-          enable = true;
-          source = ./config + "/${name}";
+          source = ./. + "/config/${name}";
+          recursive = true;
           force = true;
         };
       }) (builtins.attrNames (builtins.readDir ./config))

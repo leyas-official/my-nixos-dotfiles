@@ -1,0 +1,62 @@
+* {
+    bg:                    #090909;
+    fg:                    #e5e5e5;
+    surface:               #121212;
+    surface-fg:            #e5e5e5;
+    on-surface:            #e5e5e5;
+    primary:               #23508f;
+    primary-fg:            #ffffff;
+    primary-fixed:         #3a6bb8;
+    on-primary:            #ffffff;
+    secondary:             #242424;
+    secondary-container:   #1a1a1a;
+    secondary-fg:          #cfcfcf;
+    on-secondary:          #e5e5e5;
+    error:                 #c23f3f;
+    error-fg:              #ffffff;
+    border:                #303030;
+    highlight:             #4a4a4a;
+}
+
+
+
+/* Window */
+window {
+    background-color: @surface;
+    border: 2px;
+    border-color: @border;
+    border-radius: 10px;
+}
+
+/* Layout */
+mainbox {
+    padding: 12px;
+}
+
+/* Search bar */
+inputbar {
+    background-color: @bg;
+    text-color: @fg;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+/* List */
+listview {
+    background-color: transparent;
+}
+
+element {
+    background-color: transparent;
+    text-color: @surface-fg;
+}
+
+element selected {
+    background-color: @primary;
+    text-color: @primary-fg;
+}
+
+element urgent {
+    background-color: @error;
+    text-color: @error-fg;
+}
