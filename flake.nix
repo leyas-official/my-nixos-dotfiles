@@ -7,12 +7,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
       nixpkgs,
       home-manager,
       spicetify-nix,
+      zen-browser,
       ...
     }:
     let
@@ -25,6 +30,7 @@
         inherit pkgs;
         extraSpecialArgs = {
           inherit spicetify-nix;
+          inherit zen-browser;
         };
         modules = [
           ./home.nix

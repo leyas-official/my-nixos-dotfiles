@@ -119,7 +119,6 @@
     gcc
     wget
     hyprland
-    librewolf
     fastfetch
     go
     goose
