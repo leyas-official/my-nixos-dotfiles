@@ -1,0 +1,16 @@
+#!/usr/bin/env fish
+# Configuration
+set PICTURE_DIR ~/Pictures
+set SLEEP_TIME 300 # Wait 5 minutes (300 seconds) between changes
+
+while true
+    # Select a random wallpaper
+    set WALL (find $PICTURE_DIR -type f | shuf -n 1)
+    # Check if a file was found
+    if test -z "$WALL"
+        continue
+    end
+
+    awww img "$WALL" --transition-type simple
+    sleep $SLEEP_TIME
+end

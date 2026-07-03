@@ -167,6 +167,7 @@ in
         "video/webm" = "celluloid.desktop";
         "video/avi" = "celluloid.desktop";
         "video/mpeg" = "celluloid.desktop";
+        "application/pdf" = "browser-focus.desktop";
       };
     };
   };
@@ -233,6 +234,8 @@ in
     obs-studio
     celluloid
     zenPkgs
+    telegram-desktop
+    kdePackages.dolphin
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

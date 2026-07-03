@@ -30,6 +30,8 @@
   networking.wireless.iwd.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
 
+  security.polkit.enable = true;
+
   # Set your time zone.
   time.timeZone = "Africa/Tripoli";
 
@@ -51,9 +53,6 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -152,6 +151,7 @@
     statix
     brightnessctl
     font-awesome
+    gparted
   ];
 
   fonts.packages = with pkgs; [

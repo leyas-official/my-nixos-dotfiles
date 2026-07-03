@@ -1,9 +1,9 @@
 {
   description = "Home Manager config";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
@@ -21,16 +21,43 @@
       ...
     }:
     let
+      system = "x86_64-linux";
+
       pkgs = import nixpkgs {
-        localSystem = "x86_64-linux";
+        inherit system;
       };
     in
     {
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          inherit system;
+
+          modules = [
+            ./configuration.nix
+
+            home-manager.nixosModules.home-manager
+
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+
+                extraSpecialArgs = {
+                  inherit spicetify-nix zen-browser;
+                };
+
+                users.leyas = import ./home.nix;
+
+              };
+            }
+          ];
+        };
+      };
+
       homeConfigurations."leyas" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
-          inherit spicetify-nix;
-          inherit zen-browser;
+          inherit spicetify-nix zen-browser;
         };
         modules = [
           ./home.nix

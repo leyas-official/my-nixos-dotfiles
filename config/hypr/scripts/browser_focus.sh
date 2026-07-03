@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-
-hyprctl dispatch focuswindow 'class:zen'
-exec zen "$@"
+app="zen"
+hyprctl dispatch focuswindow "class:$app"
+exec "$app" "$@"
