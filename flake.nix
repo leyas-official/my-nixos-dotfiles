@@ -33,7 +33,7 @@
           inherit system;
 
           modules = [
-            ./configuration.nix
+            ./nixos/configuration.nix
 
             home-manager.nixosModules.home-manager
 
@@ -46,7 +46,12 @@
                   inherit spicetify-nix zen-browser;
                 };
 
-                users.leyas = import ./home.nix;
+                users.leyas = {
+                  imports = [
+                    ./home.nix
+                    spicetify-nix.homeManagerModules.default
+                  ];
+                };
 
               };
             }
@@ -54,15 +59,5 @@
         };
       };
 
-      homeConfigurations."leyas" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit spicetify-nix zen-browser;
-        };
-        modules = [
-          ./home.nix
-          spicetify-nix.homeManagerModules.default
-        ];
-      };
     };
 }
