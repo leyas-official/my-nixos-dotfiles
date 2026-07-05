@@ -152,6 +152,7 @@
     brightnessctl
     font-awesome
     gparted
+    nh
   ];
 
   fonts.packages = with pkgs; [

@@ -54,6 +54,7 @@ in
       set -e fish_transient_prompt
       oh-my-posh init fish --config $HOME/.config/ohmyposh/zen.toml | source
       oh-my-posh init fish --config $HOME/.config/ohmyposh/EDM115-newline.omp.json | source
+      export NH_FLAKE="$HOME/.config/home-manager"
     '';
 
     functions = {
