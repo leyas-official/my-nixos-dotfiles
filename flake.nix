@@ -7,17 +7,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    helium.url = "github:FKouhai/helium2nix/main";
   };
   outputs =
     {
       nixpkgs,
       home-manager,
       spicetify-nix,
-      zen-browser,
+      helium,
       ...
     }:
     let
@@ -39,7 +36,7 @@
                 useUserPackages = true;
 
                 extraSpecialArgs = {
-                  inherit spicetify-nix zen-browser;
+                  inherit spicetify-nix helium;
                 };
 
                 users.leyas = {

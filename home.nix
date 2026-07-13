@@ -2,13 +2,11 @@
   config,
   pkgs,
   spicetify-nix,
-  zen-browser,
-
+  helium,
   ...
 }:
 let
   spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-  zenPkgs = zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in
 {
   # Let Home Manager install and manage itself.
@@ -232,10 +230,10 @@ in
     jetbrains.pycharm
     obs-studio
     celluloid
-    zenPkgs
     telegram-desktop
     kdePackages.dolphin
     openssl
+    helium.defaultPackage.${system}
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

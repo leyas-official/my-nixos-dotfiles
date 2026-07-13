@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-app="zen"
+app="helium"
 hyprctl dispatch focuswindow "class:$app"
 exec "$app" "$@"
