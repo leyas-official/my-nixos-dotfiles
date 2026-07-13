@@ -235,6 +235,7 @@ in
     zenPkgs
     telegram-desktop
     kdePackages.dolphin
+    openssl
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
