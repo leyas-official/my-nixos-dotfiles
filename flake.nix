@@ -7,14 +7,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    helium.url = "github:FKouhai/helium2nix/main";
   };
   outputs =
     {
       nixpkgs,
       home-manager,
       spicetify-nix,
-      helium,
       ...
     }:
     let
@@ -36,7 +34,7 @@
                 useUserPackages = true;
 
                 extraSpecialArgs = {
-                  inherit spicetify-nix helium;
+                  inherit spicetify-nix;
                 };
 
                 users.leyas = {
