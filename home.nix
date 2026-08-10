@@ -51,6 +51,7 @@ in
       oh-my-posh init fish --config $HOME/.config/ohmyposh/zen.toml | source
       oh-my-posh init fish --config $HOME/.config/ohmyposh/EDM115-newline.omp.json | source
       export NH_FLAKE="$HOME/.config/home-manager"
+      set -gx PATH $PATH (go env GOPATH)/bin
     '';
 
     functions = {
@@ -67,23 +68,6 @@ in
       };
     };
   };
-
-  # programs.fish = lib.mkIf config.yaziModule.fishIntegration {
-  #   enable = true;
-  #
-  #   functions = {
-  #     yy = {
-  #       body = ''
-  #         set tmp (mktemp -t "yazi-cwd.XXXXXX")
-  #         yazi $argv --cwd-file="$tmp"
-  #         if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-  #           cd -- "$cwd"
-  #         end
-  #         rm -f -- "$tmp"
-  #       '';
-  #     };
-  #   };
-  # };
 
   programs.oh-my-posh = {
     enable = true;
@@ -216,6 +200,8 @@ in
     kdePackages.dolphin
     openssl
     chromium
+    osu-lazer-bin
+    ntfs3g
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

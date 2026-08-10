@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   imports = [
@@ -16,7 +16,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -27,8 +27,13 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.wireless.iwd.enable = true;
-  networking.networkmanager.wifi.backend = "iwd";
+
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+    "8.8.8.8"
+    "8.8.4.4"
+  ];
 
   security.polkit.enable = true;
 
@@ -115,6 +120,28 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
+  # 1. Enable the service and the firewall
+  services.tailscale.enable = true;
+  networking.nftables.enable = true;
+  networking.firewall = {
+    enable = true;
+    # Always allow traffic from your Tailscale network
+    trustedInterfaces = [ config.services.tailscale.interfaceName ];
+    # Allow the Tailscale UDP port through the firewall
+    allowedUDPPorts = [ config.services.tailscale.port ];
+  };
+
+  # 2. Force tailscaled to use nftables (Critical for clean nftables-only systems)
+  # This avoids the "iptables-compat" translation layer issues.
+  systemd.services.tailscaled.serviceConfig.Environment = [
+    "TS_DEBUG_FIREWALL_MODE=nftables"
+  ];
+
+  # 3. Optimization: Prevent systemd from waiting for network online
+  # (Optional but recommended for faster boot with VPNs)
+  systemd.network.wait-online.enable = false;
+  boot.initrd.systemd.network.wait-online.enable = false;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -151,12 +178,13 @@
     nixd
     nixfmt
     blueman
-    impala
     statix
     brightnessctl
     font-awesome
     gparted
     nh
+    python315
+    file
   ];
 
   fonts.packages = with pkgs; [

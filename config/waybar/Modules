@@ -296,7 +296,7 @@
 	"format-icons": [
 		"󰤯", "󰤟", "󰤢", "󰤥", "󰤨"
 	],
-  	"on-click": "$HOME/.config/hypr/scripts/waybar_scripts.sh --impala"
+  	"on-click": "$HOME/.config/hypr/scripts/waybar_scripts.sh --nmtui"
 },
 
 "power-profiles-daemon": {
